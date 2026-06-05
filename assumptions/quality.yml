@@ -1,0 +1,48 @@
+quality_weights:
+  factual_grounding: 0.20
+  summary_completeness: 0.15
+  action_item_correctness: 0.15
+  decision_capture: 0.10
+  answer_helpfulness: 0.10
+  citation_quality: 0.10
+  low_hallucination_risk: 0.10
+  latency_score: 0.05
+  offline_availability_score: 0.05
+
+modeled_scores:
+  cloud_first:
+    factual_grounding: 4.5
+    summary_completeness: 4.5
+    action_item_correctness: 4.3
+    decision_capture: 4.4
+    answer_helpfulness: 4.5
+    citation_quality: 4.0
+    low_hallucination_risk: 4.0
+    latency_score: 3.5
+    offline_availability_score: 1.0
+    privacy_score: 2.0
+  offline_first:
+    factual_grounding: 4.0
+    summary_completeness: 4.0
+    action_item_correctness: 4.0
+    decision_capture: 3.9
+    answer_helpfulness: 4.0
+    citation_quality: 4.2
+    low_hallucination_risk: 4.0
+    latency_score: 4.2
+    offline_availability_score: 5.0
+    privacy_score: 5.0
+  hybrid_router:
+    factual_grounding: 4.5
+    summary_completeness: 4.4
+    action_item_correctness: 4.4
+    decision_capture: 4.4
+    answer_helpfulness: 4.6
+    citation_quality: 4.4
+    low_hallucination_risk: 4.3
+    latency_score: 4.0
+    offline_availability_score: 4.5
+    privacy_score: 4.3
+
+# These are modeled rubric defaults for demonstration.
+# Replace with human evaluation or real benchmark results for customer studies.

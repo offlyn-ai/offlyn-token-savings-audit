@@ -1,0 +1,40 @@
+defaults:
+  words_per_minute: 150
+  tokens_per_word: 1.3
+  qa_queries_per_meeting: 5
+  qa_input_tokens_per_query: 2000
+  qa_output_tokens_per_query: 500
+  followup_drafts_per_meeting: 1
+  followup_input_tokens_per_draft: 2000
+  followup_output_tokens_per_draft: 400
+
+meetings:
+  short:
+    minutes: 30
+    summary_output_tokens: 800
+    action_output_tokens: 500
+    memory_output_tokens: 500
+  standard:
+    minutes: 60
+    summary_output_tokens: 1200
+    action_output_tokens: 800
+    memory_output_tokens: 750
+  long:
+    minutes: 90
+    summary_output_tokens: 1800
+    action_output_tokens: 1200
+    memory_output_tokens: 1000
+
+scenarios:
+  solo_user:
+    meetings_per_month: 20
+    average_minutes: 60
+    team_size: 1
+  small_team:
+    meetings_per_month: 100
+    average_minutes: 60
+    team_size: 5
+  enterprise_team:
+    meetings_per_month: 1000
+    average_minutes: 60
+    team_size: 50

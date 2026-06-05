@@ -1,0 +1,16 @@
+transcription:
+  cloud_whisper_per_minute_usd: 0.006
+  cloud_realtime_transcription_per_minute_usd: 0.017
+  notes: "Configurable defaults. Update with current provider pricing."
+
+llm:
+  model_name: "gpt-4o-style configurable baseline"
+  input_per_1m_tokens_usd: 2.50
+  output_per_1m_tokens_usd: 10.00
+
+embedding:
+  model_name: "text-embedding-3-small-style configurable baseline"
+  input_per_1m_tokens_usd: 0.02
+
+electricity:
+  local_price_per_kwh_usd: 0.30

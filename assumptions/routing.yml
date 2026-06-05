@@ -1,0 +1,22 @@
+hybrid_router:
+  compact_context_ratio: 0.20
+  fallback_rates:
+    transcription: 0.00
+    summary: 0.05
+    action_items: 0.05
+    key_moments: 0.05
+    qa: 0.20
+    memory: 0.00
+    followup: 0.15
+  cloud_allowed_tasks:
+    - complex_reasoning
+    - low_confidence_answer
+    - external_latest_knowledge
+    - user_explicit_cloud_request
+    - approved_followup_drafting
+  cloud_blocked_tasks_by_default:
+    - transcription
+    - raw_audio_upload
+    - full_transcript_upload
+    - memory_consolidation
+    - sensitive_meeting_summary

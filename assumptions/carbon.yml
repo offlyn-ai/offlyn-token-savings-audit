@@ -1,0 +1,11 @@
+carbon:
+  method: "token_proxy"
+  grams_co2e_per_1000_cloud_tokens: 0.10
+  note: "Directional placeholder. Replace with organization-specific model, hardware, datacenter, PUE, and grid assumptions."
+
+energy:
+  local_inference_watts_midpoint: 25
+  local_inference_watts_low: 15
+  local_inference_watts_high: 30
+  grid_intensity_gco2e_per_kwh: 350
+  datacenter_pue: 1.2
