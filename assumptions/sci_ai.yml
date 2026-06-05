@@ -1,0 +1,45 @@
+enabled: true
+standard_reference: "Green Software Foundation SCI-AI / ISO/IEC 21031:2024-informed"
+claim_level: "aligned_not_certified"
+default_boundary: "consumer"
+default_reporting_mode: "operational_proxy"
+include_embodied_carbon_by_default: false
+verification_status: "modeled_not_verified"
+
+consumer_boundary_components:
+  - api_and_inference
+  - local_inference
+  - orchestration
+  - scaling
+  - observability_and_monitoring
+  - data_and_feature_management
+  - storage_and_artifacts
+  - ux_and_client_side
+  - model_tool_and_service_connectors
+  - retrieval
+  - embeddings
+  - network_transfer
+
+provider_boundary_components:
+  - inception
+  - design_and_development
+  - deployment
+  - retirement
+  - data_collection
+  - data_preprocessing
+  - synthetic_data_generation
+  - model_training
+  - model_evaluation
+  - optimization
+  - system_integration
+
+functional_units:
+  - meeting_hour
+  - second_of_audio_processed
+  - transcript
+  - cloud_token_1k
+  - accepted_summary
+  - workflow_execution
+  - document_page_processed
+  - retrieval_operation
+  - embedding_generated

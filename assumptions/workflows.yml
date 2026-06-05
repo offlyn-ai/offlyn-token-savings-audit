@@ -1,0 +1,34 @@
+workflows:
+  meeting_intelligence:
+    enabled: true
+    description: "Real-time meeting transcription, summarization, action items, Q&A, and memory"
+    architectures: ["cloud_first", "offline_first", "hybrid_router"]
+    metrics: ["tokens", "cost", "carbon", "water", "network", "quality", "privacy", "resilience"]
+
+  document_qa:
+    enabled: false
+    placeholder: true
+    description: "Document ingestion, OCR, topic extraction, and local RAG"
+    note: "Coming soon: PDF/document processing, chunking, local embedding, on-device Q&A"
+    planned_architectures: ["cloud_first", "offline_first", "hybrid_router"]
+
+  field_operations:
+    enabled: false
+    placeholder: true
+    description: "Offline pack processing, edge inference, field data sync"
+    note: "Coming soon: offline pack generation, edge model deployment, selective cloud sync"
+    planned_architectures: ["offline_first", "hybrid_router"]
+
+  code_review:
+    enabled: false
+    placeholder: true
+    description: "Local code analysis, diff summarization, PR review assistance"
+    note: "Coming soon: on-device code understanding with selective cloud escalation"
+    planned_architectures: ["cloud_first", "offline_first", "hybrid_router"]
+
+  customer_support:
+    enabled: false
+    placeholder: true
+    description: "Ticket classification, response drafting, knowledge base Q&A"
+    note: "Coming soon: local-first support workflows with cloud escalation for complex cases"
+    planned_architectures: ["cloud_first", "hybrid_router"]

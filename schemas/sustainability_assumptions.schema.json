@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/offlyn-ai/offlyn-token-savings-audit/schemas/sustainability_assumptions.schema.json",
+  "title": "Sustainability Assumptions",
+  "description": "Schema for carbon, energy, and water assumptions used in the audit.",
+  "type": "object",
+  "required": ["carbon", "energy", "water"],
+  "properties": {
+    "carbon": {
+      "type": "object",
+      "required": ["cloud_token_co2e_g_per_1k_mid"],
+      "properties": {
+        "method": { "type": "string" },
+        "grams_co2e_per_1000_cloud_tokens": { "type": "number", "minimum": 0 },
+        "cloud_token_co2e_g_per_1k_low": { "type": "number", "minimum": 0 },
+        "cloud_token_co2e_g_per_1k_mid": { "type": "number", "minimum": 0 },
+        "cloud_token_co2e_g_per_1k_high": { "type": "number", "minimum": 0 },
+        "note": { "type": "string" }
+      }
+    },
+    "energy": {
+      "type": "object",
+      "required": ["local_incremental_power_watts_mid", "grid_intensity_gco2e_per_kwh"],
+      "properties": {
+        "local_inference_watts_midpoint": { "type": "number", "minimum": 0 },
+        "local_inference_watts_low": { "type": "number", "minimum": 0 },
+        "local_inference_watts_high": { "type": "number", "minimum": 0 },
+        "local_incremental_power_watts_low": { "type": "number", "minimum": 0 },
+        "local_incremental_power_watts_mid": { "type": "number", "minimum": 0 },
+        "local_incremental_power_watts_high": { "type": "number", "minimum": 0 },
+        "baseline_device_power_excluded": { "type": "boolean" },
+        "local_energy_model": { "type": "string" },
+        "grid_intensity_gco2e_per_kwh": { "type": "number", "minimum": 0 },
+        "datacenter_pue": { "type": "number", "minimum": 1.0 }
+      }
+    },
+    "water": {
+      "type": "object",
+      "required": ["generic_cloud_wue_l_per_kwh"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "water_metric_type": { "type": "string" },
+        "efficient_cloud_wue_l_per_kwh": { "type": "number", "minimum": 0 },
+        "generic_cloud_wue_l_per_kwh": { "type": "number", "minimum": 0 },
+        "local_direct_cooling_wue_l_per_kwh": { "type": "number", "minimum": 0 },
+        "hybrid_cloud_fraction_default": { "type": "number", "minimum": 0, "maximum": 1 },
+        "include_indirect_electricity_water": { "type": "boolean" },
+        "claim_level": { "type": "string" }
+      }
+    },
+    "reporting_modes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

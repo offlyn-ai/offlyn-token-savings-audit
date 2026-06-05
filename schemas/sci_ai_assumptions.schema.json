@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/offlyn-ai/offlyn-token-savings-audit/schemas/sci_ai_assumptions.schema.json",
+  "title": "SCI-AI Assumptions",
+  "description": "Schema for SCI-AI configuration assumptions used in the Offlyn AI Resource Avoidance Audit.",
+  "type": "object",
+  "required": ["enabled", "standard_reference", "claim_level", "default_boundary", "default_reporting_mode", "consumer_boundary_components", "functional_units"],
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether SCI-AI reporting is enabled"
+    },
+    "standard_reference": {
+      "type": "string",
+      "description": "Reference standard for the reporting methodology"
+    },
+    "claim_level": {
+      "type": "string",
+      "enum": ["aligned_not_certified", "certified", "third_party_verified"],
+      "description": "Level of certification claim"
+    },
+    "default_boundary": {
+      "type": "string",
+      "enum": ["consumer", "provider", "both"],
+      "description": "Default SCI boundary for reporting"
+    },
+    "default_reporting_mode": {
+      "type": "string",
+      "enum": ["operational_proxy", "operational_plus_embodied_estimate", "third_party_verified"],
+      "description": "Default reporting mode"
+    },
+    "include_embodied_carbon_by_default": {
+      "type": "boolean",
+      "description": "Whether to include embodied carbon in default reports"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": ["modeled_not_verified", "measured_not_verified", "third_party_verified"],
+      "description": "Current verification status of the audit"
+    },
+    "consumer_boundary_components": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Components included in Consumer SCI boundary"
+    },
+    "provider_boundary_components": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Components included in Provider SCI boundary"
+    },
+    "functional_units": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Supported functional units for SCI reporting"
+    }
+  }
+}

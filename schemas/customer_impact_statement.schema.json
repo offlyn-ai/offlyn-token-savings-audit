@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/offlyn-ai/offlyn-token-savings-audit/schemas/customer_impact_statement.schema.json",
+  "title": "Customer Impact Statement",
+  "description": "Schema for a customer-facing AI resource avoidance impact statement.",
+  "type": "object",
+  "required": ["audit_period", "baseline_architecture", "solution_architecture", "claim_level", "metrics"],
+  "properties": {
+    "audit_period": {
+      "type": "object",
+      "required": ["start_date", "end_date"],
+      "properties": {
+        "start_date": { "type": "string", "format": "date" },
+        "end_date": { "type": "string", "format": "date" }
+      }
+    },
+    "baseline_architecture": {
+      "type": "string",
+      "enum": ["cloud_first", "custom"]
+    },
+    "solution_architecture": {
+      "type": "string",
+      "enum": ["offline_first", "hybrid_router", "custom"]
+    },
+    "claim_level": {
+      "type": "string",
+      "enum": ["modeled_not_verified", "measured_not_verified", "third_party_verified"]
+    },
+    "reporting_mode": {
+      "type": "string",
+      "enum": ["operational_proxy", "operational_plus_embodied_estimate", "third_party_verified"]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "cloud_tokens_avoided": { "type": "integer", "minimum": 0 },
+        "api_cost_avoided_usd": { "type": "number", "minimum": 0 },
+        "avoided_cloud_carbon_gco2e": { "type": "number", "minimum": 0 },
+        "net_avoided_total_carbon_gco2e": { "type": "number" },
+        "avoided_direct_water_liters": { "type": "number", "minimum": 0 },
+        "consumer_sci_gco2e_per_meeting_hour": { "type": "number", "minimum": 0 },
+        "consumer_sci_gco2e_per_workflow_execution": { "type": "number", "minimum": 0 },
+        "quality_score": { "type": "number", "minimum": 1, "maximum": 5 },
+        "privacy_score": { "type": "number", "minimum": 1, "maximum": 5 },
+        "offline_resilience_score": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "disclaimer": {
+      "type": "string",
+      "description": "Required disclaimer text for the impact statement"
+    }
+  }
+}

@@ -1,12 +1,12 @@
 # Offlyn Token Savings Audit
 
-**Benchmarking cloud-first, offline-first, and hybrid meeting intelligence architectures.**
+**Token, cost, carbon, water, privacy, and SCI-AI reporting for cloud-first, local-first, and hybrid AI workflows.**
 
-> Useful intelligence. Fewer tokens. Lower watts.
+> Useful intelligence. Fewer tokens. Lower watts. Less cloud water.
 
 ---
 
-Offlyn Token Savings Audit is a transparent benchmark framework for estimating how many cloud AI tokens, API dollars, and cloud-side emissions can be avoided when meeting intelligence runs locally or through a local-first hybrid router instead of a cloud-first AI pipeline.
+Offlyn Token Savings Audit is a transparent benchmark framework for estimating how many cloud AI tokens, API dollars, cloud-side emissions, and datacenter cooling water can be avoided when meeting intelligence runs locally or through a local-first hybrid router instead of a cloud-first AI pipeline. It includes SCI-AI-aligned reporting with AI-native functional units for enterprise GreenOps and FinOps decision support.
 
 This repository compares three architectures:
 
@@ -32,14 +32,17 @@ This repository compares three architectures:
 10. [Quality Model](#quality-model)
 11. [Privacy Model](#privacy-model)
 12. [Carbon and Energy Model](#carbon-and-energy-model)
-13. [Example Results](#example-results)
-14. [Team-Scale Savings](#team-scale-savings)
-15. [Best-Fit Use Cases by Architecture](#best-fit-use-cases-by-architecture)
-16. [How to Update Assumptions](#how-to-update-assumptions)
-17. [How to Run the Calculator](#how-to-run-the-calculator)
-18. [Enterprise Audit Tiers](#enterprise-audit-tiers)
-19. [Limitations](#limitations)
-20. [License](#license)
+13. [SCI-AI-Aligned Reporting](#sci-ai-aligned-reporting)
+14. [Water Use Reporting](#water-use-reporting)
+15. [Example Results](#example-results)
+16. [Team-Scale Savings](#team-scale-savings)
+17. [Best-Fit Use Cases by Architecture](#best-fit-use-cases-by-architecture)
+18. [How to Update Assumptions](#how-to-update-assumptions)
+19. [How to Run the Calculator](#how-to-run-the-calculator)
+20. [Enterprise Audit Tiers](#enterprise-audit-tiers)
+21. [Claims Policy](#claims-policy)
+22. [Limitations](#limitations)
+23. [License](#license)
 
 ---
 
@@ -215,17 +218,60 @@ See [analysis/privacy_value.md](analysis/privacy_value.md) for enterprise privac
 
 ## Carbon and Energy Model
 
-Carbon estimates are **directional and assumption-based**. Default: 0.10 grams CO2e per 1,000 cloud tokens.
+Carbon estimates are **directional and assumption-based**. The SCI-AI calculator uses 0.50 gCO2e per 1,000 cloud tokens (midpoint) and an incremental local energy model (5W above device baseline).
 
-| Architecture | Cloud CO2e (60-min) | Local CO2e (60-min) |
-|--------------|:-------------------:|:-------------------:|
-| Cloud-first | ~6.4 g | ~0 g |
-| Offline-first | 0 g | ~8.75 g |
-| Hybrid | ~0.14 g | ~8.75 g |
+| Architecture | Cloud CO2e (60-min) | Local Incremental CO2e (60-min) | Total Consumer CO2e |
+|--------------|:-------------------:|:-------------------------------:|:-------------------:|
+| Cloud-first | 32.2 g | 0 g | 32.2 g |
+| Offline-first | 0 g | 1.75 g | 1.75 g |
+| Hybrid | 0.68 g | 1.75 g | 2.43 g |
 
-Local CO2e depends on electricity grid mix. In regions with renewable energy, local CO2e approaches zero.
+Local CO2e uses the **incremental** energy model: only the additional power drawn for AI inference above the device's idle baseline (5W midpoint vs 25W total device). See [analysis/energy_methodology.md](analysis/energy_methodology.md).
 
-See [analysis/carbon_methodology.md](analysis/carbon_methodology.md) for methodology and sensitivity analysis.
+See [analysis/carbon_methodology.md](analysis/carbon_methodology.md) for full methodology and sensitivity analysis.
+
+---
+
+## SCI-AI-Aligned Reporting
+
+This repository includes an SCI-AI-aligned reporting model for comparing AI workflow carbon intensity across cloud-first, local-first, and hybrid architectures.
+
+The default reporting boundary is **Consumer SCI**, covering operational AI consumption: inference, orchestration, retrieval, storage, observability, network transfer, client-side energy, and model/tool connectors.
+
+For meeting intelligence workflows, the audit reports carbon intensity using AI-native functional units:
+
+- gCO2e per meeting hour
+- gCO2e per second of audio processed
+- gCO2e per transcript
+- gCO2e per 1,000 cloud tokens
+- gCO2e per accepted summary
+- gCO2e per workflow execution
+
+| Functional Unit | Cloud-First | Offline-First | Hybrid |
+|-----------------|------------:|-------------:|-------:|
+| gCO2e / meeting hour | 32.2 | 1.75 | 2.43 |
+| gCO2e / second audio | 0.0090 | 0.0005 | 0.0007 |
+| gCO2e / workflow execution | 32.2 | 1.75 | 2.43 |
+
+These are modeled estimates for architecture comparison and decision support. They are not carbon credits, offsets, certified emissions reductions, or ISO/SCI certifications.
+
+See [analysis/sci_ai_methodology.md](analysis/sci_ai_methodology.md) for the full SCI-AI framework.
+
+---
+
+## Water Use Reporting
+
+Datacenter cooling water is reported as a **supplemental** AI resource efficiency metric (not part of the SCI carbon formula).
+
+| Architecture | Direct Datacenter Water (60-min) | Avoided vs Cloud-First |
+|--------------|:--------------------------------:|:----------------------:|
+| Cloud-first | 0.147 L | -- |
+| Offline-first | 0 L | 0.147 L |
+| Hybrid | 0.003 L | 0.144 L |
+
+Local devices do not use datacenter-style evaporative cooling. This metric estimates only direct datacenter cooling water demand avoided.
+
+See [analysis/water_methodology.md](analysis/water_methodology.md) for methodology and caveats.
 
 ---
 
@@ -319,13 +365,21 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Generate Results
+### Generate Token/Cost Results
 
 ```bash
 python scripts/calculate_savings.py
 ```
 
 This writes comparison tables to `analysis/generated_results.md`.
+
+### Generate SCI-AI Results
+
+```bash
+python scripts/calculate_sci_ai.py
+```
+
+This writes SCI-AI functional unit tables to `analysis/generated_sci_ai_results.md`.
 
 ### Render Tables to Stdout
 
@@ -344,25 +398,70 @@ pytest tests/ -v
 
 ## Enterprise Audit Tiers
 
-### Tier 1: Self-Serve Audit
+### Tier 1: Self-Serve AI Resource Audit
 
+- Token, cost, carbon, water, privacy, and Consumer SCI-AI operational proxy estimates.
 - Update assumptions with your pricing and workload.
 - Run the calculator on default or exported meeting data.
-- Get architecture comparison tables.
+- Get architecture comparison tables with SCI-AI functional units.
 - Zero cost to evaluate.
 
-### Tier 2: Forward-Deployed Offlyn Audit
+### Tier 2: Forward-Deployed GreenOps Audit
 
-- Offlyn engineers integrate with actual meeting, document, and workflow systems.
-- Measures real transcript length, Q&A usage, routing patterns, and model calls.
-- Produces token savings, quality, privacy, and carbon report.
-- Custom recommendations for your workload.
+- Offlyn engineers instrument real workflows.
+- Measure actual routing, fallback rate, transcript length, cloud calls, and local runtime metrics.
+- Produce workflow-level Consumer SCI, token savings, quality, privacy, water, and carbon report.
+- Custom recommendations for your workload with ESG/FinOps/GreenOps exports.
 
-### Tier 3: Full Offline AI Roadmap
+### Tier 3: Offline AI Roadmap + Assurance Packet
 
-- Offlyn designs cloud/local/hybrid AI architecture across meetings, documents, field workflows, and edge devices.
-- Includes local SLMs, model routing, offline packs, audit traces, privacy policy, cloud fallback, and deployment plan.
-- Full architecture design and implementation support.
+- Architecture design across meetings, documents, field workflows, and edge devices.
+- Hybrid routing implementation with measurement instrumentation.
+- ESG / FinOps / GreenOps reporting exports.
+- Third-party verification readiness.
+- Optional Provider SCI modeling for custom model training or fine-tuning.
+- Full deployment plan with audit traces and privacy policy.
+
+---
+
+## Supported Workflows
+
+This framework is designed to extend beyond meeting intelligence to any AI workflow where local-first processing can avoid cloud resources.
+
+| Workflow | Status | Description |
+|----------|--------|-------------|
+| Meeting Intelligence | **Active** | Transcription, summarization, action items, Q&A, memory |
+| Document Q&A | Planned | PDF/document processing, local RAG, on-device Q&A |
+| Field Operations | Planned | Offline pack processing, edge inference, selective sync |
+| Code Review | Planned | Local code analysis, diff summarization, PR assistance |
+| Customer Support | Planned | Ticket classification, response drafting, knowledge base |
+
+See [`assumptions/workflows.yml`](assumptions/workflows.yml) for the extensibility schema.
+
+---
+
+## Machine-Readable Exports
+
+For FinOps/GreenOps dashboard integration, export audit results in JSON or CSV:
+
+```bash
+python scripts/export_audit.py --format json -o output/audit_run.json
+python scripts/export_audit.py --format csv -o output/audit_run.csv
+```
+
+Output conforms to [`schemas/audit_run.schema.json`](schemas/audit_run.schema.json) and includes all 10 dimensions across all architectures, plus SCI-AI functional units.
+
+---
+
+## Claims Policy
+
+This repository uses SCI-AI-aligned, ISO/IEC 21031:2024-informed methodology. All outputs are modeled estimates for architecture decision support.
+
+**Allowed**: "SCI-AI-aligned," "modeled estimate," "operational SCI-AI proxy," "estimated avoided cloud inference emissions," "assurance-ready methodology."
+
+**Disallowed**: "ISO certified," "SCI certified," "carbon neutral," "zero carbon AI," "water-free AI," "verified emissions reduction," "carbon credit," "offset."
+
+See [analysis/claims_policy.md](analysis/claims_policy.md) for the full claims framework.
 
 ---
 
@@ -372,10 +471,28 @@ pytest tests/ -v
 - Quality scores are modeled rubric defaults, not measured benchmarks, unless stated otherwise.
 - Carbon estimates are directional. Real emissions depend on datacenter location, hardware, and grid mix.
 - The cloud-first baseline is a configurable architecture model, not a description of any specific product.
-- Local compute estimates assume midpoint power draw (25W). Actual varies by chip, workload, and thermal state.
+- Local compute estimates assume midpoint power draw (25W for cost, 5W incremental for carbon). Actual varies by chip, workload, and thermal state.
 - Pricing changes frequently. Update `assumptions/pricing.yml` with current rates.
 - This framework does not measure actual inference quality; use human evaluation for production decisions.
 - Offline-first requires Apple Silicon Mac. Not applicable to other platforms without adaptation.
+
+---
+
+## Enterprise Engagement
+
+Interested in an AI Resource Avoidance audit for your organization?
+
+| | Self-Serve | Forward-Deployed | Full Roadmap |
+|---|---|---|---|
+| **What** | Run calculator with your assumptions | Offlyn engineers measure real workloads | Architecture design + deployment plan |
+| **Output** | JSON/CSV + markdown tables | Custom SCI-AI report | Audit traces + assurance packet |
+| **Timeline** | Immediate | 2-4 weeks | 4-8 weeks |
+| **Cost** | Free (open source) | Contact us | Contact us |
+
+**Get started:**
+- Self-serve: Clone this repo and run `python scripts/export_audit.py`
+- Enterprise: [hello@offlyn.ai](mailto:hello@offlyn.ai) | [offlyn.ai](https://offlyn.ai)
+- Contributing: See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ---
 

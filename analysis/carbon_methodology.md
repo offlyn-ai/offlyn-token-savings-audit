@@ -139,6 +139,57 @@ Treat these numbers as a sensitivity model, not a certified carbon footprint.
 4. **Model efficiency improves**: newer models and hardware reduce per-token energy over time.
 5. **Quantization reduces local energy**: 4-bit models use less memory bandwidth and compute per token.
 
+## Incremental Energy Model (SCI-AI)
+
+For SCI-AI-aligned carbon attribution, this audit uses an **incremental energy model** that attributes only the additional power drawn by AI inference above the device's baseline idle consumption.
+
+| Model | Watts | Purpose |
+|-------|------:|---------|
+| Total device power (cost model) | 25W | Electricity cost in FinOps reporting |
+| Incremental inference power (carbon model) | 5W | Carbon attribution for SCI-AI |
+
+The incremental model (3-8W, midpoint 5W) is used for Consumer SCI reporting because the device draws baseline power regardless of whether AI inference is running. Only the marginal energy should be attributed to the AI workload.
+
+See [analysis/energy_methodology.md](energy_methodology.md) for the full rationale.
+
+---
+
+## SCI-AI-Aligned Reporting
+
+This carbon methodology feeds into the broader SCI-AI reporting framework:
+
+- **Consumer SCI**: `total_consumer_carbon_gCO2e / functional_unit_count`
+- **Functional units**: gCO2e per meeting hour, per second of audio, per transcript, per workflow execution
+- **Boundary**: Operational AI consumption (inference, retrieval, orchestration)
+- **Reporting mode**: `operational_proxy` by default
+
+See [analysis/sci_ai_methodology.md](sci_ai_methodology.md) for the full SCI-AI framework.
+
+---
+
+## Net Avoided vs Gross Avoided
+
+- **Avoided cloud carbon**: cloud inference emissions not incurred because workload is local.
+- **Net avoided total carbon**: avoided cloud emissions minus incremental local energy.
+
+This distinction prevents overclaiming. See [analysis/avoided_emissions_methodology.md](avoided_emissions_methodology.md).
+
+---
+
+## Updated Cloud Token Carbon Range
+
+The audit supports three cloud token carbon intensity levels:
+
+| Level | gCO2e per 1,000 tokens | Context |
+|-------|------------------------:|---------|
+| Low | 0.10 | Efficient models on renewable-powered infrastructure |
+| Mid (default for SCI-AI) | 0.50 | Standard cloud inference |
+| High | 3.00 | Large models on carbon-intensive grids |
+
+The legacy token proxy (0.10 g/1k tokens) remains in the basic calculator for backward compatibility. The SCI-AI calculator uses the mid value (0.50 g/1k tokens) by default.
+
+---
+
 ## Recommendations for Accurate Carbon Assessment
 
 For organizations that need precise carbon accounting:
@@ -149,3 +200,5 @@ For organizations that need precise carbon accounting:
 4. Account for the amortized embodied carbon of hardware.
 5. Consider the full lifecycle: training, inference, networking, storage.
 6. Update assumptions annually as hardware and grid mix evolve.
+7. Use incremental local energy measurements (e.g., macOS `powermetrics`) rather than estimates.
+8. Engage third-party verification for formal sustainability reporting.

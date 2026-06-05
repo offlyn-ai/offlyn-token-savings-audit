@@ -1,0 +1,22 @@
+enabled: true
+note: "Estimates network transfer for cloud-first pipeline. Local-first avoids all of these uploads."
+
+cloud_first_transfers:
+  audio_upload_mb_per_minute: 1.0
+  transcript_bytes_per_token: 4
+  embedding_vector_bytes: 3072
+  embedding_chunk_size_tokens: 512
+  embedding_dims: 768
+  qa_payload_bytes_per_query: 8000
+  summary_response_bytes: 4800
+  action_response_bytes: 3200
+  memory_response_bytes: 3000
+  followup_response_bytes: 1600
+
+hybrid_transfers:
+  audio_upload: false
+  transcript_upload: false
+  compact_context_only: true
+
+local_first_transfers:
+  all_network_transfer_mb: 0.0
