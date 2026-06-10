@@ -47,3 +47,5 @@ Reliable, publicly available allocation methodologies for these components do no
 ### Why Water is Supplemental
 
 Water is an important infrastructure efficiency metric but is not part of the SCI carbon intensity formula (gCO2e/R). It is reported separately to inform decision-making without conflating distinct environmental impacts.
+
+Direct datacenter cooling-water estimates are included as a supplemental enterprise infrastructure-efficiency metric. They are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.

@@ -43,7 +43,7 @@ This repository contains a SCI for AI-aligned, ISO/IEC 21031:2024-informed, self
 
 - Certification readiness score: 100/100
 - Tests: 86+ passing
-- Water: Supplemental, not in SCI score
+- Water: Supplemental, not in SCI score. Direct datacenter cooling-water estimates are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.
 - Embodied carbon: Excluded (M = 0)
 - Quality: Modeled defaults
 

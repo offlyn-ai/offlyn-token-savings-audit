@@ -50,12 +50,36 @@ One 60-minute meeting intelligence workflow.
 | [gsf_submission_checklist.md](gsf_submission_checklist.md) | Pre-submission checklist |
 | [release_notes_v0.1.md](release_notes_v0.1.md) | Release notes for v0.1 |
 
-## How to Regenerate
+## Reviewer Navigation
+
+| GSF Disclosure Area | File(s) |
+|---|---|
+| Organization and software description | `sci_ai_disclosure.md`, `submission_metadata.yml` |
+| SCI score and units | `sci_ai_calculation.md`, `sci_ai_calculation.csv` |
+| Software boundary | `sci_ai_boundary.md` |
+| Functional unit | `sci_ai_functional_unit.md` |
+| Energy and carbon data | `assumptions_register.yml`, `data_sources.md` |
+| Embodied emissions | `sci_ai_calculation.md`, `limitations.md` |
+| Methodology, calculation, assumptions, limitations, attestation | `sci_ai_disclosure.md`, `sci_ai_calculation.md`, `assumptions_register.yml`, `limitations.md`, `sci_ai_attestation.md` |
+
+## Reproduce the Disclosure Package
+
+Run:
 
 ```bash
+python scripts/calculate_savings.py
+python scripts/calculate_sci_ai.py
 python scripts/export_sci_ai_disclosure.py
 python scripts/validate_sci_ai_disclosure.py --strict
+pytest tests/ -v
 ```
+
+Expected result:
+
+- Certification-readiness score: 100/100
+- Tests: all passing
+- Generated file: `certification/sci_ai_calculation.csv`
+- Generated file: `certification/certification_readiness_score.json`
 
 ## Disclaimer
 

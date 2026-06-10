@@ -92,3 +92,30 @@ class TestSubmissionFiles:
             meta = yaml.safe_load(f)
         assert meta["submission"]["signatory_name"] == "Joel Nishant Reddy"
         assert meta["submission"]["certification_claim_status"] == "not_certified"
+
+
+class TestGsfSubmissionEmail:
+    def test_gsf_submission_email_exists(self):
+        assert (REPO_ROOT / "certification" / "gsf_submission_email_draft.md").exists()
+
+    def test_submission_email_contains_gsf_address(self):
+        content = (REPO_ROOT / "certification" / "gsf_submission_email_draft.md").read_text()
+        assert "sci-certification@greensoftware.foundation" in content
+
+    def test_submission_email_water_excluded(self):
+        content = (REPO_ROOT / "certification" / "gsf_submission_email_draft.md").read_text()
+        assert "excluded from the SCI score" in content
+
+
+class TestReviewerAids:
+    def test_disclosure_has_reviewer_quick_summary(self):
+        content = (REPO_ROOT / "certification" / "sci_ai_disclosure.md").read_text()
+        assert "Reviewer quick summary" in content
+
+    def test_certification_readme_has_reviewer_navigation(self):
+        content = (REPO_ROOT / "certification" / "README.md").read_text()
+        assert "Reviewer Navigation" in content
+
+    def test_certification_readme_has_reproduce_commands(self):
+        content = (REPO_ROOT / "certification" / "README.md").read_text()
+        assert "pytest tests/" in content
