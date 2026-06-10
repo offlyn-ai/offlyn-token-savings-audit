@@ -1,5 +1,22 @@
 # Offlyn Meeting Intelligence Hybrid Routing Benchmark — SCI for AI-aligned Disclosure
 
+## Reviewer quick summary
+
+| Item | Value |
+|---|---|
+| Organization | Offlyn.ai |
+| Software system | Offlyn AI Resource Avoidance Audit |
+| Disclosure title | Offlyn Meeting Intelligence Hybrid Routing Benchmark — SCI for AI-aligned Consumer SCI Operational Proxy Disclosure |
+| Disclosure version | 0.1.0 |
+| Boundary | Consumer SCI operational boundary |
+| Functional unit | One 60-minute meeting intelligence workflow |
+| Formula used | SCI operational proxy = O / R |
+| Embodied emissions | Excluded; M = 0 due to unavailable reliable allocation data |
+| Water | Supplemental only; excluded from SCI score |
+| Verification status | Self-attested, modeled, not third-party verified |
+| Certification status | Prepared for GSF SCI self-certification submission; not yet certified |
+| Signatory | Joel Nishant Reddy, Co-founder, Offlyn.ai |
+
 ## Disclosure Status
 
 This is a self-attested, modeled, SCI for AI-aligned Consumer SCI operational proxy disclosure. It is not a formal ISO certification, Green Software Foundation certification, carbon credit, offset, certified emissions reduction, or carbon-neutrality claim unless and until an official public certificate is issued.
@@ -48,6 +65,8 @@ Where:
 - M = embodied emissions (excluded, M = 0)
 - R = functional unit count
 
+This disclosure reports an operational SCI proxy. Embodied emissions are excluded from this version because reliable allocation data is unavailable for local user devices, cloud provider hardware, networking, and storage infrastructure. Future versions may include embodied emissions when reliable allocation data is available.
+
 See [sci_ai_calculation.md](sci_ai_calculation.md) for the full component breakdown.
 
 ## Scenarios
@@ -65,6 +84,8 @@ Embodied emissions are excluded from the default operational proxy because relia
 ## Water
 
 Water is reported as a supplemental metric. It is not included in the SCI carbon score.
+
+Direct datacenter cooling-water estimates are included as a supplemental enterprise infrastructure-efficiency metric. They are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.
 
 The default water model estimates direct datacenter cooling water for cloud-routed workloads. Local-first AI is not water-free — local devices still use electricity, and electricity generation may have indirect water impacts. The default model only estimates reduction in direct cloud datacenter cooling-water demand.
 

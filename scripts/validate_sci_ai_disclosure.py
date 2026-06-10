@@ -223,17 +223,18 @@ def run_checklist() -> list:
         "remediation": "Remove disallowed claims from README.md"
     })
 
-    # 20. Attestation file exists with signatory
+    # 20. Attestation file exists with signatory + submission email draft
     attestation_ok = (
         file_exists(CERT_DIR / "sci_ai_attestation.md") and
         file_contains(CERT_DIR / "sci_ai_attestation.md", "joel nishant reddy") and
-        file_contains(CERT_DIR / "sci_ai_attestation.md", "co-founder, offlyn.ai")
+        file_contains(CERT_DIR / "sci_ai_attestation.md", "co-founder, offlyn.ai") and
+        file_exists(CERT_DIR / "gsf_submission_email_draft.md")
     )
     items.append({
         "id": "attestation_exists",
         "description": "Attestation file exists with signatory",
         "passed": attestation_ok,
-        "remediation": "Create certification/sci_ai_attestation.md with Joel Nishant Reddy as signatory"
+        "remediation": "Create certification/sci_ai_attestation.md with Joel Nishant Reddy and gsf_submission_email_draft.md"
     })
 
     # 21. Evidence log exists
@@ -262,7 +263,7 @@ def run_checklist() -> list:
         "remediation": "Run scripts/export_sci_ai_disclosure.py and create certification/submission_metadata.yml"
     })
 
-    # 24. Tests pass or test command documented; submission files present
+    # 24. Tests pass or test command documented; submission files present; reproduce instructions
     items.append({
         "id": "tests_documented",
         "description": "Tests pass or test command documented",
@@ -270,18 +271,21 @@ def run_checklist() -> list:
                   file_exists(CERT_DIR / "reviewer_notes.md") and
                   file_contains(CERT_DIR / "reviewer_notes.md", "pytest") and
                   file_exists(CERT_DIR / "gsf_submission_checklist.md") and
-                  file_exists(CERT_DIR / "release_notes_v0.1.md"),
-        "remediation": "Ensure tests, reviewer_notes, gsf_submission_checklist, and release_notes exist"
+                  file_exists(CERT_DIR / "release_notes_v0.1.md") and
+                  file_contains(CERT_DIR / "README.md", "reproduce"),
+        "remediation": "Ensure tests, reviewer_notes, gsf_submission_checklist, release_notes, and reproduce instructions exist"
     })
 
-    # 25. README disclosure status present with not-yet-certified language
+    # 25. README disclosure status present with not-yet-certified language + reviewer aids
     items.append({
         "id": "readme_disclosure_status",
         "description": "README disclosure status present",
         "passed": (file_contains(REPO_ROOT / "README.md", "sci for ai-aligned disclosure") or
                    file_contains(REPO_ROOT / "README.md", "sci for ai-aligned")) and
-                  file_contains(REPO_ROOT / "README.md", "not yet certified"),
-        "remediation": "Add SCI for AI-aligned Disclosure section with 'not yet certified' to README.md"
+                  file_contains(REPO_ROOT / "README.md", "not yet certified") and
+                  file_contains(CERT_DIR / "README.md", "reviewer navigation") and
+                  file_contains(CERT_DIR / "sci_ai_disclosure.md", "reviewer quick summary"),
+        "remediation": "Add SCI for AI-aligned Disclosure section, reviewer navigation, and reviewer quick summary"
     })
 
     return items

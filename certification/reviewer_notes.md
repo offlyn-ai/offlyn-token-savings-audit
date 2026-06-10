@@ -42,6 +42,8 @@ Water is reported as a supplemental metric because:
 - Datacenter cooling water is an important infrastructure impact worth disclosing
 - Supplemental treatment avoids conflating distinct environmental concerns
 
+Direct datacenter cooling-water estimates are included as a supplemental enterprise infrastructure-efficiency metric. They are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.
+
 ## Where Assumptions Are Located
 
 | Content | Location |

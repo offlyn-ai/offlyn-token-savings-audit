@@ -48,7 +48,7 @@ This repository compares three architectures:
 
 ## Executive Summary
 
-Using default assumptions, a 60-minute meeting with 5 Q&A queries generates approximately **64,450 cloud billable tokens** under a cloud-first architecture. The offline-first architecture avoids **100%** of these tokens. The hybrid router avoids approximately **97.9%**, escalating only compact context for selected fallback tasks.
+Using default assumptions, a 60-minute meeting with 5 Q&A queries generates approximately **64,450 cloud billable tokens** under a cloud-first architecture. The offline-first architecture avoids **100%** of these tokens. Under the default modeled 60-minute meeting-intelligence scenario, the hybrid local-first router reduces cloud billable tokens by **97.9%** versus the configurable cloud-first baseline, escalating only compact context for selected fallback tasks.
 
 | Metric | Cloud-First Baseline | Offlyn Clipper Offline-First | Hybrid Local-First Router |
 |--------|---------------------:|----------------------------:|-------------------------:|

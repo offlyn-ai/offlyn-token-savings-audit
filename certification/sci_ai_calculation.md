@@ -19,7 +19,7 @@ SCI operational proxy = O / R
 
 **M = 0** because:
 
-Embodied emissions are excluded from the default operational proxy because reliable allocation data for local user devices, cloud provider hardware, networking, and storage infrastructure is not currently available. Future disclosures may include embodied emissions when reliable allocation data is available.
+This disclosure reports an operational SCI proxy. Embodied emissions are excluded from this version because reliable allocation data is unavailable for local user devices, cloud provider hardware, networking, and storage infrastructure. Future versions may include embodied emissions when reliable allocation data is available.
 
 ## Operational Emissions Component Breakdown
 
@@ -98,6 +98,8 @@ direct_datacenter_water_liters = cloud_it_energy_kwh × PUE × WUE_l_per_kwh
 ```
 
 Water is reported separately and is NOT included in the SCI carbon intensity calculation.
+
+Direct datacenter cooling-water estimates are included as a supplemental enterprise infrastructure-efficiency metric. They are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.
 
 ## Avoided Emissions (Separate from SCI Score)
 

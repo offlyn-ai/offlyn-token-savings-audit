@@ -49,11 +49,11 @@
 
 ## Architecture Decision
 
-Based on the modeled audit:
-- **97.9% of cloud tokens avoided** through hybrid local-first routing.
-- **92.5% net carbon reduction** (accounting for incremental local energy).
-- **97.9% reduction in datacenter cooling-water demand**.
-- **Quality preserved** (hybrid score 4.42 vs cloud-first 4.14).
+Based on the modeled audit (default 60-minute meeting-intelligence scenario):
+- Under the default modeled scenario, the hybrid local-first router reduces cloud billable tokens by **97.9%** versus the configurable cloud-first baseline.
+- **92.5% modeled net carbon reduction** (accounting for incremental local energy).
+- **97.9% modeled reduction in direct datacenter cooling-water demand** (supplemental metric, not included in SCI score).
+- **Quality preserved** (hybrid score 4.42 vs cloud-first 4.14, modeled defaults).
 - **Privacy improved** (score 4.3 vs 2.0).
 
 ---
