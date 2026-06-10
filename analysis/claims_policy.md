@@ -1,6 +1,6 @@
 # Claims Policy
 
-This document defines the allowed and disallowed sustainability claims for the Offlyn AI Resource Avoidance Audit. The policy prevents greenwashing and ensures all communications remain technically accurate and legally defensible.
+This document defines the allowed and disallowed sustainability claims for the Offlyn Token Savings Audit. The policy prevents greenwashing and ensures all communications remain technically accurate and legally defensible.
 
 ---
 

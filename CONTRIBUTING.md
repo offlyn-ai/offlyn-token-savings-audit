@@ -1,4 +1,4 @@
-# Contributing to Offlyn AI Resource Avoidance Audit
+# Contributing to Offlyn Token Savings Audit
 
 We welcome contributions that improve the accuracy, coverage, and enterprise applicability of this audit framework.
 
