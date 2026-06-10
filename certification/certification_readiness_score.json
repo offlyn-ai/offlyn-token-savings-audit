@@ -1,0 +1,158 @@
+{
+  "score": 100,
+  "max": 100,
+  "passed_count": 25,
+  "total_count": 25,
+  "items": [
+    {
+      "id": "software_system_described",
+      "description": "Software system described",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "disclosure_version_present",
+      "description": "Disclosure version present",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "boundary_defined",
+      "description": "Boundary clearly defined",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "functional_unit_defined",
+      "description": "Functional unit clearly defined",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "sci_formula_included",
+      "description": "SCI formula included",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "operational_emissions_included",
+      "description": "Operational emissions included",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "embodied_emissions_addressed",
+      "description": "Embodied emissions included or explicitly excluded with rationale",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "energy_assumptions_documented",
+      "description": "Energy assumptions documented",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "carbon_intensity_documented",
+      "description": "Carbon intensity assumptions documented",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "water_supplemental",
+      "description": "Water disclosed as supplemental and excluded from SCI score",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "avoided_emissions_separated",
+      "description": "Avoided emissions separated from SCI score",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "scenarios_documented",
+      "description": "Cloud-first/local-first/hybrid scenarios documented",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "token_calculations_reproducible",
+      "description": "Token calculations reproducible",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "carbon_calculations_reproducible",
+      "description": "Carbon calculations reproducible",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "water_calculations_reproducible",
+      "description": "Water calculations reproducible",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "quality_methodology_disclosed",
+      "description": "Quality methodology disclosed",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "quality_scores_labeled",
+      "description": "Quality scores marked modeled or measured",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "claims_policy_exists",
+      "description": "Claims policy exists",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "disallowed_claims_absent",
+      "description": "Disallowed claims absent from public claims",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "attestation_exists",
+      "description": "Attestation file exists with signatory",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "evidence_log_exists",
+      "description": "Evidence log exists",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "limitations_exists",
+      "description": "Limitations file exists",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "calculation_csv_exists",
+      "description": "Calculation CSV exists",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "tests_documented",
+      "description": "Tests pass or test command documented",
+      "passed": true,
+      "remediation": null
+    },
+    {
+      "id": "readme_disclosure_status",
+      "description": "README disclosure status present",
+      "passed": true,
+      "remediation": null
+    }
+  ]
+}

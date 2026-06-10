@@ -1,0 +1,79 @@
+disclosure:
+  name: "Offlyn Meeting Intelligence Hybrid Routing Benchmark"
+  version: "0.1.0"
+  disclosure_type: "SCI for AI-aligned Consumer SCI operational proxy"
+  verification_status: "self_attested_modeled_not_certified"
+  primary_functional_unit: "one_60_minute_meeting_workflow"
+  water_treatment: "supplemental_not_in_sci_score"
+  standard_reference: "Green Software Foundation SCI for AI / ISO/IEC 21031:2024-informed"
+  boundary: "consumer_sci_operational"
+  embodied_carbon_default: "excluded"
+
+carbon:
+  cloud_token_co2e_g_per_1k_low: 0.10
+  cloud_token_co2e_g_per_1k_mid: 0.50
+  cloud_token_co2e_g_per_1k_high: 3.00
+  selected_case: "mid"
+  local_grid_intensity_g_per_kwh: 350
+  datacenter_pue: 1.2
+  embodied_carbon_included: false
+  embodied_carbon_exclusion_reason: "Reliable allocation data unavailable for default disclosure."
+
+local_energy:
+  model: "incremental_inference_above_baseline"
+  local_incremental_power_watts_low: 3
+  local_incremental_power_watts_mid: 5
+  local_incremental_power_watts_high: 8
+  selected_case: "mid"
+  active_processing_hours: 1.0
+  baseline_device_power_excluded: true
+  baseline_exclusion_reason: "All architectures require a user device; baseline is not a differentiator."
+
+water:
+  included_in_sci_score: false
+  metric_type: "supplemental_direct_datacenter_cooling_water"
+  efficient_cloud_wue_l_per_kwh: 0.27
+  generic_cloud_wue_l_per_kwh: 1.90
+  selected_case: "efficient_cloud"
+  local_direct_cooling_wue_l_per_kwh: 0.0
+  include_indirect_electricity_water: false
+  note: "Water is supplemental and is not included in the SCI carbon score."
+
+quality:
+  quality_scores_are_measured: false
+  quality_scores_are_modeled_defaults: true
+  required_future_upgrade: "Add measured human or LLM-as-judge quality evaluation."
+  dimensions:
+    - correctness
+    - completeness
+    - citation_coverage
+    - hallucination_risk
+    - action_item_usefulness
+    - fallback_appropriateness
+    - human_acceptance
+    - llm_as_judge
+
+claims:
+  certification_status: "not_certified"
+  allowed_terms:
+    - "SCI for AI-aligned"
+    - "ISO/IEC 21031:2024-informed"
+    - "modeled estimate"
+    - "operational proxy"
+    - "self-attested disclosure"
+    - "certification-readiness package"
+    - "supplemental direct datacenter cooling-water estimate"
+    - "not a carbon credit or offset"
+  disallowed_terms:
+    - "ISO certified"
+    - "SCI certified"
+    - "SCI for AI certified"
+    - "Green Software Foundation certified"
+    - "carbon neutral"
+    - "zero carbon"
+    - "water-free AI"
+    - "verified emissions reduction"
+    - "carbon credit"
+    - "offset"
+    - "guaranteed Scope 3 reduction"
+    - "99% approval guaranteed"

@@ -74,16 +74,31 @@ Based on the modeled audit:
 
 ## Disclaimer
 
-During the modeled audit period, Offlyn estimated that the hybrid workflow avoided 63,096,000 cloud tokens, $518.65 in API cost, 31,548 gCO2e of cloud inference emissions, and 143.8 liters of direct datacenter cooling-water demand compared with the cloud-first baseline. The report also estimates Consumer SCI-AI operational proxy metrics such as gCO2e per meeting hour, gCO2e per second of audio processed, and gCO2e per workflow execution.
+During the modeled audit period, Offlyn estimated that the hybrid workflow avoided 63,096,000 cloud tokens, $518.65 in API cost, 31,548 gCO2e of cloud inference emissions, and 143.8 liters of direct datacenter cooling-water demand compared with the cloud-first baseline. The report also estimates Consumer SCI operational proxy metrics such as gCO2e per meeting hour, gCO2e per second of audio processed, and gCO2e per workflow execution.
 
-These figures are modeled estimates for architecture decision support. They are not carbon credits, offsets, certified emissions reductions, or ISO/SCI certifications. Update assumptions with organization-specific data for production reporting.
+These figures are modeled estimates for architecture decision support. They are not carbon credits, offsets, certified emissions reductions, or carbon-neutrality claims. This is a self-attested disclosure prepared as a certification-readiness package. It is not a formal ISO certification, Green Software Foundation certification, or verified emissions reduction unless and until an official public certificate is issued. Update assumptions with organization-specific data for production reporting.
+
+---
+
+## Disclosure Status
+
+| Item | Value |
+|------|-------|
+| Disclosure type | SCI for AI-aligned Consumer SCI operational proxy |
+| Standard reference | ISO/IEC 21031:2024-informed |
+| Verification | Self-attested modeled disclosure |
+| Water | Supplemental, not included in SCI score |
+| Embodied carbon | Excluded (M = 0) |
+| Certification | Certification-readiness package, not yet certified |
 
 ---
 
 ## Methodology References
 
-- [SCI-AI Methodology](../analysis/sci_ai_methodology.md)
+- [SCI for AI Methodology](../analysis/sci_ai_methodology.md)
 - [Energy Methodology](../analysis/energy_methodology.md)
 - [Water Methodology](../analysis/water_methodology.md)
+- [Quality Methodology](../analysis/quality_methodology.md)
 - [Avoided Emissions Methodology](../analysis/avoided_emissions_methodology.md)
 - [Claims Policy](../analysis/claims_policy.md)
+- [Full Disclosure Package](../certification/)
