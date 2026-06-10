@@ -14,7 +14,9 @@ All outputs are modeled estimates, not certified environmental claims.
 """
 
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 
 import yaml
 
@@ -43,7 +45,70 @@ def load_sci_ai_assumptions():
     return base
 
 
+# --- Dataclass for structured disclosure output ---
+
+
+@dataclass
+class SciAiScenarioResult:
+    scenario_name: str
+    cloud_tokens: int
+    token_reduction_pct: Optional[float]
+    api_cost_usd: float
+    cloud_carbon_g: float
+    local_incremental_energy_kwh: float
+    local_carbon_g: float
+    total_operational_carbon_g: float
+    sci_g_per_workflow: float
+    sci_g_per_meeting_hour: float
+    sci_g_per_second_audio: float
+    sci_g_per_1k_cloud_tokens: Optional[float]
+    direct_datacenter_water_liters: float
+    water_included_in_sci: bool
+    embodied_carbon_included: bool
+    verification_status: str
+
+
+# --- Validation helpers ---
+
+
+def validate_non_negative(value: float, name: str) -> None:
+    """Raise ValueError for negative values."""
+    if value < 0:
+        raise ValueError(f"{name} cannot be negative, got {value}")
+
+
+def validate_positive_denominator(value: float, name: str) -> None:
+    """Raise ValueError for zero or negative functional-unit denominators."""
+    if value <= 0:
+        raise ValueError(f"{name} must be positive (non-zero denominator), got {value}")
+
+
 # --- Pure calculation functions ---
+
+
+def calculate_local_carbon_g(local_kwh: float, grid_intensity_g_per_kwh: float) -> float:
+    """Return local operational carbon in gCO2e."""
+    validate_non_negative(local_kwh, "local_kwh")
+    validate_non_negative(grid_intensity_g_per_kwh, "grid_intensity_g_per_kwh")
+    return local_kwh * grid_intensity_g_per_kwh
+
+
+def calculate_operational_sci_g_per_unit(
+    total_operational_carbon_g: float, functional_unit_count: float
+) -> float:
+    """Return operational SCI proxy in gCO2e per functional unit."""
+    validate_non_negative(total_operational_carbon_g, "total_operational_carbon_g")
+    validate_positive_denominator(functional_unit_count, "functional_unit_count")
+    return total_operational_carbon_g / functional_unit_count
+
+
+def calculate_token_reduction_pct(baseline_tokens: int, solution_tokens: int) -> float:
+    """Return token reduction percentage."""
+    validate_non_negative(baseline_tokens, "baseline_tokens")
+    validate_non_negative(solution_tokens, "solution_tokens")
+    if baseline_tokens == 0:
+        return 0.0
+    return ((baseline_tokens - solution_tokens) / baseline_tokens) * 100
 
 
 def calculate_incremental_local_energy(

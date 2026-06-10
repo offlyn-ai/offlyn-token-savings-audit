@@ -1,0 +1,4 @@
+scenario,cloud_tokens,token_reduction_pct,api_cost_usd,cloud_carbon_g,local_incremental_energy_kwh,local_carbon_g,total_operational_carbon_g,sci_g_per_workflow,sci_g_per_meeting_hour,sci_g_per_second_audio,sci_g_per_1k_cloud_tokens,direct_datacenter_water_liters,water_included_in_sci,embodied_carbon_included,verification_status
+Cloud-first,64450,N/A,0.534484,32.225,0.0,0.0,32.225,32.225,32.225,0.008951,0.5,0.146946,False,False,self_attested_modeled_not_certified
+Local-first,0,100.0,0.0,0.0,0.005,1.75,1.75,1.75,1.75,0.000486,N/A,0.0,False,False,self_attested_modeled_not_certified
+Hybrid local-first router,1354,97.9,0.008335,0.677,0.005,1.75,2.427,2.427,2.427,0.000674,0.5,0.003087,False,False,self_attested_modeled_not_certified

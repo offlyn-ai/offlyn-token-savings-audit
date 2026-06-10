@@ -1,163 +1,188 @@
-# SCI-AI Methodology
+# SCI for AI-aligned Methodology
 
-This audit uses an SCI-AI-aligned reporting structure inspired by the Green Software Foundation SCI-AI specification and ISO/IEC 21031:2024.
+This document describes the methodology for the SCI for AI-aligned Consumer SCI operational proxy disclosure used in this repository.
 
-The audit separates:
+## SCI for AI-aligned Reporting
 
-1. **Consumer SCI** -- carbon intensity of AI service consumption during operation and monitoring.
-2. **Provider SCI** -- carbon intensity of model development, training, deployment, and retirement.
+This repository implements a Green Software Foundation SCI for AI-aligned, ISO/IEC 21031:2024-informed methodology for comparing the operational carbon intensity of AI meeting intelligence workflows.
 
-For Offlyn Clipper-style enterprise audits, Consumer SCI is the default because the audit compares cloud-first, local-first, and hybrid runtime workflows.
+The SCI (Software Carbon Intensity) specification provides a standardized way to measure and report the carbon intensity of software systems per functional unit. SCI for AI extends this to AI-specific workloads by defining appropriate boundaries, functional units, and emission components for AI inference and training.
 
----
+This disclosure is a **self-attested, modeled, operational proxy** — not a formal certification or verified measurement.
 
-## Consumer SCI Formula
+## Consumer SCI vs Provider SCI
 
-Consumer SCI is reported as:
+The Green Software Foundation SCI for AI framework defines two boundaries:
+
+| Boundary | Scope | Example Activities |
+|----------|-------|-------------------|
+| **Consumer SCI** | Operational inference-time usage | API calls, local inference, embedding, retrieval, orchestration |
+| **Provider SCI** | Model lifecycle | Data collection, training, fine-tuning, deployment, optimization |
+
+### Why This Repo Defaults to Consumer SCI
+
+1. **Actionable for enterprises**: Architecture decisions (cloud vs local vs hybrid) affect Consumer SCI directly.
+2. **Provider SCI is shared**: Training carbon is a sunk cost amortized across all users; it does not change with routing decisions.
+3. **Measurable at inference time**: Consumer SCI components can be estimated from token counts, watts, and grid intensity.
+4. **Decision support**: Enterprise customers choosing between architectures need Consumer SCI comparisons.
+
+Provider SCI is excluded from the default calculation and documented as a future extension.
+
+## SCI Operational Proxy Formula
+
+The canonical SCI formula:
 
 ```
-Consumer SCI = total_consumer_carbon_gCO2e / functional_unit_count
+SCI = (O + M) / R
 ```
 
-Where total consumer carbon may include:
+Where:
+- **O** = Operational emissions (gCO2e)
+- **M** = Embodied emissions allocated to the functional unit (gCO2e)
+- **R** = Functional unit count
+
+For this disclosure:
 
 ```
-total_consumer_carbon_gCO2e =
-  cloud_inference_carbon_gCO2e
+SCI operational proxy = O / R
+```
+
+**M = 0** (embodied emissions excluded).
+
+## Expanded Operational Carbon Formula
+
+```
+total_consumer_operational_carbon_gCO2e =
+    cloud_inference_carbon_gCO2e
   + local_incremental_inference_carbon_gCO2e
+  + asr_carbon_gCO2e
+  + embedding_carbon_gCO2e
+  + retrieval_carbon_gCO2e
   + orchestration_carbon_gCO2e
-  + retrieval_and_embedding_carbon_gCO2e
   + storage_carbon_gCO2e
-  + network_carbon_gCO2e
+  + network_transfer_carbon_gCO2e
   + observability_carbon_gCO2e
-  + client_side_carbon_gCO2e
-  + allocated_embodied_carbon_gCO2e_when_available
 ```
 
-**Important:**
-- By default, this repo reports an operational SCI-AI proxy because embodied hardware data is often unavailable.
-- Full SCI-AI reporting should include embodied carbon when reliable allocation data is available.
-- Reports must clearly label whether results are:
-  - `operational_proxy`
-  - `operational_plus_embodied_estimate`
-  - `third_party_verified`
+### Component Implementation Status
 
----
+| Component | Status | Method |
+|-----------|--------|--------|
+| Cloud inference carbon | **Included** | (cloud_tokens / 1000) × gCO2e_per_1k_tokens |
+| Local incremental inference carbon | **Included** | (incremental_watts / 1000) × hours × grid_intensity |
+| ASR carbon | **Included** | Modeled within cloud or local inference totals |
+| Embedding carbon | **Included** | Modeled within cloud or local inference totals |
+| Retrieval carbon | **Included** | Modeled within cloud or local inference totals |
+| Orchestration carbon | Modeled as zero | Negligible inference-time overhead |
+| Storage carbon | Modeled as zero | Reliable per-meeting allocation unavailable |
+| Network transfer carbon | Modeled as zero | Volume modeled in MB; energy attribution TBD |
+| Observability carbon | Modeled as zero | Negligible monitoring overhead |
 
-## Consumer SCI Boundary Components
+Components modeled as zero are documented in `certification/limitations.md` and may be included in future disclosures when attribution data improves.
 
-When material, the Consumer SCI boundary includes:
+## Functional Units
 
-| Component | Description |
-|-----------|-------------|
-| API and inference | Cloud LLM, ASR, and embedding API calls |
-| Local inference | On-device model execution (incremental energy only) |
-| Orchestration | Agentic workflow routing, model-to-model exchanges |
-| Scaling | Load balancers, API gateways, auto-scaling infrastructure |
-| Observability and monitoring | Logging, metrics, tracing infrastructure |
-| Data and feature management | Feature stores, caching layers |
-| Storage and artifacts | Model artifacts, vector stores, search indexes |
-| UX and client-side | Application energy on user device |
-| Model/tool/service connectors | Tool calls, MCP servers, external API adapters |
-| Retrieval | RAG pipelines, vector search, hybrid search |
-| Embeddings | Embedding generation for semantic search |
-| Network transfer | Data movement between client, edge, and cloud |
+### Primary Functional Unit
 
----
+**One 60-minute meeting intelligence workflow.**
 
-## AI-Specific Functional Units
+A single meeting processed into transcript, summary, action items, key moments, Q&A-ready memory, and follow-up draft.
 
-Support multiple functional units because AI workflows are multi-modal and multi-step.
+### Secondary Functional Units
 
-| AI Workload | Functional Unit |
-|-------------|----------------|
-| LLM summarization | gCO2e per 1,000 tokens or per million tokens |
-| Speech recognition | gCO2e per second of audio processed |
-| Meeting intelligence | gCO2e per meeting hour |
-| Agentic workflow | gCO2e per workflow execution |
-| Document analysis | gCO2e per page processed |
-| Retrieval / RAG | gCO2e per retrieval operation |
-| Embeddings | gCO2e per embedding generated |
-| Accepted output | gCO2e per accepted summary or action item |
+| Unit | Formula | Use Case |
+|------|---------|----------|
+| gCO2e per meeting hour | total_carbon / meeting_hours | Duration normalization |
+| gCO2e per second of audio | total_carbon / (minutes × 60) | Granular time comparison |
+| gCO2e per transcript | total_carbon / 1 | Per-document intensity |
+| gCO2e per 1,000 cloud tokens | cloud_carbon / (tokens / 1000) | Cloud cost analysis |
+| gCO2e per accepted summary | total_carbon / 1 | Output-weighted intensity |
+| gCO2e per workflow execution | total_carbon / 1 | Equivalent to primary |
 
-The repo reports at least:
-- gCO2e per meeting hour
-- gCO2e per transcript
-- gCO2e per second of audio processed
-- gCO2e per 1,000 cloud tokens
-- gCO2e per accepted summary
-- gCO2e per workflow execution
+## Embodied Emissions Exclusion Rationale
 
----
+Embodied emissions (M) are excluded from the default operational proxy because:
 
-## Multi-Operation Accounting
+- Reliable allocation data for local user devices is unavailable
+- Cloud provider hardware embodied carbon per inference request is unpublished
+- Networking and storage infrastructure allocation methods are immature
+- Including unreliable estimates would undermine disclosure credibility
 
-For hybrid AI workflows, account for all triggered operations when material:
+**Required disclosure language**: "Embodied emissions are excluded from the default operational proxy because reliable allocation data is unavailable. Future disclosures may include embodied emissions when allocation data improves."
+
+## Water as Supplemental Metric
+
+Water is reported as a supplemental infrastructure-efficiency metric. It is **not included in the SCI carbon score**.
+
+Rationale:
+- SCI is gCO2e/R — a carbon intensity metric measured in mass units
+- Water (liters) is a different physical unit
+- Combining them in a single score would conflate distinct environmental impacts
+- Supplemental treatment provides transparency without methodological confusion
+
+Water model: `direct_datacenter_water_liters = cloud_IT_energy_kWh × PUE × WUE_L/kWh`
+
+## Avoided Emissions — Separate from SCI Score
+
+Avoided emissions represent the difference between the cloud-first baseline and an alternative architecture:
 
 ```
-workflow_carbon_gCO2e =
-  audio_capture_or_import_carbon
-  + speech_to_text_carbon
-  + local_llm_carbon
-  + cloud_llm_carbon
-  + embedding_carbon
-  + retrieval_carbon
-  + tool_call_carbon
-  + orchestration_carbon
-  + storage_carbon
-  + network_transfer_carbon
-  + observability_carbon
+avoided_cloud_carbon = cloud_first_carbon - solution_cloud_carbon
+net_avoided_total_carbon = cloud_first_total_carbon - solution_total_carbon
 ```
 
-This is important because a cloud-first meeting intelligence system is not just "one LLM call." It may include ASR, transcript cleanup, embeddings, summary generation, action-item extraction, document retrieval, retries, storage, monitoring, and API infrastructure.
+Avoided emissions are:
+- **Informational** — they show what *would have been* emitted under the baseline
+- **Not part of the SCI score** — SCI measures intensity per unit, not reduction claims
+- **Not carbon credits or offsets** — they cannot be traded or transferred
+- **Not verified emissions reductions** — they are modeled estimates
 
----
+## Claim Guardrails
 
-## Provider SCI (Optional / Future-Facing)
+### Allowed Terminology
 
-Provider SCI is not used by default in this audit. It applies only when measuring model development, training, fine-tuning, optimization, deployment, or retirement work.
+- "SCI for AI-aligned"
+- "ISO/IEC 21031:2024-informed"
+- "Modeled estimate"
+- "SCI operational proxy"
+- "Consumer SCI boundary"
+- "Self-attested disclosure"
+- "Certification-readiness package"
+- "Supplemental direct datacenter cooling-water estimate"
+- "Not a carbon credit or offset"
 
-Provider SCI boundary may include:
-- Data collection
-- Data preprocessing and cleaning
-- Synthetic data generation
-- Model training or fine-tuning
-- Distributed training infrastructure
-- Model evaluation and benchmarking
-- Model optimization
-- Deployment infrastructure
-- Retirement / decommissioning
-- Embodied carbon of training hardware when available
+### Disallowed Terminology
 
----
-
-## Reporting Modes
-
-| Mode | Includes | Use Case |
-|------|----------|----------|
-| `operational_proxy` | Cloud inference + local incremental energy | Default for architecture comparison |
-| `operational_plus_embodied_estimate` | Operational + allocated hardware embodied carbon | When hardware lifecycle data available |
-| `third_party_verified` | Full lifecycle with external verification | Formal ESG reporting |
-
-This repo defaults to `operational_proxy`.
-
----
+- "ISO certified"
+- "SCI certified"
+- "SCI for AI certified"
+- "Green Software Foundation certified"
+- "Carbon neutral"
+- "Zero carbon AI"
+- "Water-free AI"
+- "Verified emissions reduction"
+- "Carbon credit" / "Offset"
+- "Guaranteed Scope 3 reduction"
 
 ## Relationship to ISO/IEC 21031:2024
 
-This audit is ISO/IEC 21031:2024-informed but not ISO-certified. The SCI formula structure (E * I + M per R) informs the reporting approach, but this implementation:
-- Uses modeled token-proxy estimates rather than measured energy data
-- Does not include embodied carbon by default
-- Has not undergone third-party verification
-- Is designed for internal architecture decision support
+This methodology is **informed by** ISO/IEC 21031:2024 (Software Carbon Intensity). It adopts the SCI formula structure, functional unit approach, and boundary definitions. It does not claim ISO certification or conformance unless and until formal certification is obtained.
 
----
+## Reporting Modes
 
-## Limitations
+| Mode | Description |
+|------|-------------|
+| `operational_proxy` | Operational carbon only; M = 0 (default) |
+| `operational_plus_embodied_estimate` | Includes estimated embodied carbon (future) |
+| `third_party_verified` | After external verification (future) |
 
-- All values are modeled estimates based on configurable assumptions.
-- Real cloud inference energy varies by model, hardware, utilization, and provider.
-- Local incremental energy varies by chip generation, thermal state, and workload.
-- Embodied carbon allocation is excluded unless explicitly enabled.
-- This is not a certified carbon footprint, offset, or credit.
-- The audit does not constitute compliance with any environmental regulation.
+Default: `operational_proxy` with `modeled_not_verified` status.
+
+## References
+
+- Green Software Foundation SCI Specification
+- Green Software Foundation SCI for AI
+- ISO/IEC 21031:2024 — Software Carbon Intensity
+- IEA World Energy Outlook (grid intensity data)
+- Uptime Institute (PUE data)
+- Published hyperscaler sustainability reports (WUE data)

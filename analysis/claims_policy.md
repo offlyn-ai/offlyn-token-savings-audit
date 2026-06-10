@@ -10,16 +10,19 @@ The following language may be used in documentation, reports, marketing, and cus
 
 | Claim | Context |
 |-------|---------|
-| "SCI-AI-aligned" | Reporting structure follows SCI-AI specification |
+| "SCI for AI-aligned" | Reporting structure follows SCI for AI specification |
 | "SCI-aligned" | Carbon intensity reporting follows SCI methodology |
 | "ISO/IEC 21031:2024-informed" | Methodology is informed by the standard |
 | "Modeled estimate" | All default values are assumptions-based |
 | "Operational SCI-AI proxy" | Carbon intensity excludes embodied carbon |
 | "Consumer SCI reporting" | Boundary covers AI service consumption |
+| "Self-attested disclosure" | Disclosure is prepared by applicant, not third-party |
+| "Certification-readiness package" | Designed for GSF SCI self-certification submission prep |
 | "Estimated avoided cloud resource use" | Comparative reduction vs baseline |
 | "Estimated avoided cloud inference emissions" | Carbon not emitted due to local routing |
 | "Estimated reduction in datacenter cooling-water demand" | Water metric |
-| "Not an offset or carbon credit" | Clarification of what avoidance means |
+| "Supplemental direct datacenter cooling-water estimate" | Water as separate metric |
+| "Not a carbon credit or offset" | Clarification of what avoidance means |
 | "Assurance-ready methodology" | Structure supports future verification |
 
 ---
@@ -32,7 +35,9 @@ The following language must NOT be used anywhere in this repository, generated r
 |------------------|--------|
 | "ISO certified" | No ISO certification has been obtained |
 | "SCI certified" | No SCI certification exists or has been obtained |
-| "SCI-AI certified" | No SCI-AI certification exists or has been obtained |
+| "SCI for AI certified" | No SCI for AI certification has been obtained |
+| "SCI-AI certified" | No SCI-AI certification has been obtained |
+| "Green Software Foundation certified" | No GSF certification has been obtained |
 | "Carbon neutral" | Would require offsets and third-party verification |
 | "Zero carbon AI" | No AI system has zero carbon impact |
 | "Water-free AI" | Local devices still consume electricity with water footprint |
@@ -40,6 +45,7 @@ The following language must NOT be used anywhere in this repository, generated r
 | "Carbon credit" | Avoided emissions are not tradeable credits |
 | "Offset" | Architecture comparison is not an offset mechanism |
 | "Guaranteed Scope 3 reduction" | Modeled estimates cannot guarantee supply-chain reductions |
+| "99% approval guaranteed" | GSF self-certification approval cannot be guaranteed |
 | "Net zero" | Would require comprehensive lifecycle accounting and offsets |
 | "Climate positive" | Would require removal credits exceeding total footprint |
 

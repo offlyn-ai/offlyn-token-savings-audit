@@ -68,6 +68,49 @@ Using default assumptions, a 60-minute meeting with 5 Q&A queries generates appr
 
 ---
 
+## SCI for AI-aligned Disclosure
+
+This repository includes a public Green Software Foundation SCI for AI-aligned disclosure package for a modeled 60-minute meeting intelligence workflow.
+
+The disclosure compares cloud-first, local-first, and hybrid local-first AI routing across:
+
+- Cloud tokens
+- API cost
+- Incremental local energy
+- Operational carbon intensity
+- Answer-quality preservation
+- Privacy exposure
+- Network transfer
+- Supplemental datacenter cooling-water impact
+
+The default calculation is a Consumer SCI operational proxy. It is ISO/IEC 21031:2024-informed and designed for architecture comparison, FinOps, GreenOps, and enterprise sustainability readiness.
+
+This disclosure is self-attested and modeled. It is not a carbon credit, offset, certified emissions reduction, carbon-neutrality claim, or formal ISO/SCI certification unless and until a public Green Software Foundation SCI self-certification certificate is issued.
+
+### Disclosure status
+
+| Item | Status |
+|------|--------|
+| Disclosure type | SCI for AI-aligned Consumer SCI operational proxy |
+| Boundary | 60-minute meeting intelligence workflow |
+| Functional unit | One meeting workflow |
+| Water | Supplemental metric, not included in SCI score |
+| Verification | Self-attested modeled disclosure |
+| Certification status | Certification-readiness package, not yet certified |
+
+The current disclosure package is prepared for Green Software Foundation SCI self-certification submission review and should not be described as certified unless and until an official public certificate is issued.
+
+**Key documents:**
+- [`certification/sci_ai_disclosure.md`](certification/sci_ai_disclosure.md) — Main disclosure
+- [`certification/assumptions_register.yml`](certification/assumptions_register.yml) — Consolidated assumptions
+- [`certification/sci_ai_calculation.csv`](certification/sci_ai_calculation.csv) — Machine-readable results
+- [`certification/data_sources.md`](certification/data_sources.md) — Assumption data sources
+- [`certification/gsf_submission_checklist.md`](certification/gsf_submission_checklist.md) — Submission checklist
+
+See [`certification/`](certification/) for the full disclosure package.
+
+---
+
 ## Why Token Savings Matter
 
 Most enterprise AI cost and privacy exposure come from repeatedly sending large meeting transcripts, audio-derived text, embeddings, retrieved context, summaries, and Q&A prompts to cloud APIs. Each meeting processed cloud-first passes the transcript through multiple pipeline stages, multiplying the token cost.

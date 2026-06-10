@@ -2,7 +2,7 @@
 
 This audit estimates avoided datacenter cooling-water demand for workloads moved from cloud-first to local-first or hybrid execution.
 
-Water is not part of the SCI-AI carbon formula, but it is reported as a supplemental AI resource efficiency metric.
+**Water is supplemental and is not included in the SCI carbon score.** It is reported as a separate infrastructure-efficiency metric to inform decision-making without conflating distinct environmental impacts.
 
 ---
 
@@ -75,7 +75,7 @@ Using the generic WUE (1.90 L/kWh):
 
 ## Caveats
 
-- Local devices still use electricity, and electricity generation may have indirect water use.
+- **Local-first AI is not water-free.** Local devices still use electricity, and electricity generation may have indirect water impacts. The default model only estimates reduction in direct cloud datacenter cooling-water demand.
 - This default model only estimates direct datacenter cooling water.
 - Do not claim local AI is "water-free."
 - Claim only that local-first and hybrid routing can reduce datacenter cooling-water dependency.
