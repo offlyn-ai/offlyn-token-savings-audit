@@ -1,7 +1,7 @@
 # GSF SCI Self-Certification Submission Email Draft
 
 To: sci-certification@greensoftware.foundation
-Subject: SCI Self-Certification Submission — Offlyn Meeting Intelligence Hybrid Routing Benchmark
+Subject: SCI Self-Certification Submission — Offlyn.ai — Offlyn Token Savings Audit
 
 Hello Green Software Foundation SCI Certification Team,
 
@@ -9,7 +9,7 @@ Offlyn.ai is submitting a public SCI for AI-aligned, ISO/IEC 21031:2024-informed
 
 Disclosure title: Offlyn Meeting Intelligence Hybrid Routing Benchmark — SCI for AI-aligned Consumer SCI Operational Proxy Disclosure
 
-Public release URL: [INSERT RELEASE URL]
+Public release URL: https://github.com/offlyn-ai/offlyn-token-savings-audit/releases/tag/v0.1.3-sci-ai-disclosure-readiness
 
 Repository: https://github.com/offlyn-ai/offlyn-token-savings-audit
 
