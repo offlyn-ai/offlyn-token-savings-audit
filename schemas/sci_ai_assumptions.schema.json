@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/offlyn-ai/offlyn-token-savings-audit/schemas/sci_ai_assumptions.schema.json",
   "title": "SCI-AI Assumptions",
-  "description": "Schema for SCI-AI configuration assumptions used in the Offlyn AI Resource Avoidance Audit.",
+  "description": "Schema for SCI-AI configuration assumptions used in the Offlyn Token Savings Audit.",
   "type": "object",
   "required": ["enabled", "standard_reference", "claim_level", "default_boundary", "default_reporting_mode", "consumer_boundary_components", "functional_units"],
   "properties": {

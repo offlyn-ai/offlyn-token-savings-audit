@@ -5,7 +5,7 @@
 | Item | Value |
 |---|---|
 | Organization | Offlyn.ai |
-| Software system | Offlyn AI Resource Avoidance Audit |
+| Software system | Offlyn Token Savings Audit |
 | Disclosure title | Offlyn Meeting Intelligence Hybrid Routing Benchmark — SCI for AI-aligned Consumer SCI Operational Proxy Disclosure |
 | Disclosure version | 0.1.0 |
 | Boundary | Consumer SCI operational boundary |
@@ -23,7 +23,7 @@ This is a self-attested, modeled, SCI for AI-aligned Consumer SCI operational pr
 
 ## Software System
 
-Offlyn AI Resource Avoidance Audit for a 60-minute meeting intelligence workflow.
+Offlyn Token Savings Audit for a 60-minute meeting intelligence workflow.
 
 ## Purpose
 
