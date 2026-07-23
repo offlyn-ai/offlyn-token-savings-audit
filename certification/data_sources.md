@@ -20,7 +20,7 @@ This disclosure uses modeled defaults for architecture comparison. Where provide
 |-----------|-----------|-----------|
 | Cloud token carbon | Literature estimate | Published AI carbon footprint research (range: 0.10 - 3.00 gCO2e/1k tokens) |
 | Local incremental power | Engineering estimate | Apple Silicon power measurement literature (3-8W range for inference workloads) |
-| Grid intensity | Published data | IEA World Energy Outlook global average |
+| Grid intensity | Published data | IEA World Energy Outlook 2023, global average electricity emission factor |
 | PUE | Industry report | Uptime Institute Global Data Center Survey |
 | WUE | Provider reports | Published hyperscaler sustainability reports |
 

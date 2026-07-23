@@ -1,4 +1,4 @@
-# SCI for AI Functional Unit Definitions
+# SCI Functional Unit Definition — Offlyn Clippers
 
 ## Primary Functional Unit
 

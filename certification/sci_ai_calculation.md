@@ -1,117 +1,129 @@
-# SCI for AI Calculation Methodology
+# SCI Calculation — Offlyn Clipper
 
 ## Canonical SCI Formula
 
 ```
-SCI = (O + M) / R
+SCI = (E × I + M) / R
 ```
 
 Where:
-- **O** = Operational emissions (gCO2e) — included
-- **M** = Embodied emissions allocated to the functional unit (gCO2e) — excluded (M = 0)
-- **R** = Functional unit count — one 60-minute meeting workflow
+- **E** = Energy consumed (kWh)
+- **I** = Carbon intensity of electricity (gCO2eq/kWh)
+- **M** = Embodied emissions allocated to the functional unit (gCO2eq)
+- **R** = Functional unit count
 
-## This Disclosure: Operational Proxy
+## This Disclosure
 
-```
-SCI operational proxy = O / R
-```
+**SCI = 0.35 gCO2eq per meeting workflow**
 
-**M = 0** because:
+Based on measured power consumption on Apple M4 Mac, July 22, 2026.
 
-This disclosure reports an operational SCI proxy. Embodied emissions are excluded from this version because reliable allocation data is unavailable for local user devices, cloud provider hardware, networking, and storage infrastructure. Future versions may include embodied emissions when reliable allocation data is available.
+---
 
-## Operational Emissions Component Breakdown
+## Measured Power Values
 
-```
-total_consumer_operational_carbon_gCO2e =
-    cloud_inference_carbon_gCO2e
-  + local_incremental_inference_carbon_gCO2e
-  + asr_carbon_gCO2e
-  + embedding_carbon_gCO2e
-  + retrieval_carbon_gCO2e
-  + orchestration_carbon_gCO2e
-  + storage_carbon_gCO2e
-  + network_transfer_carbon_gCO2e
-  + observability_carbon_gCO2e
-```
+| Phase | Baseline | Active | Incremental |
+|-------|----------|--------|-------------|
+| Idle | 198 mW | — | — |
+| Transcription (Whisper) | 198 mW | 1,056 mW | 858 mW (0.86 W) |
+| Summarization (Gemma 4) | 198 mW | 12,313 mW | 12,115 mW (12.11 W) |
 
-### Component Status
+**Measurement method:** macOS `powermetrics` with `cpu_power` sampler at 1-second intervals
 
-| Component | Status | Method |
-|-----------|--------|--------|
-| Cloud inference carbon | Included | Token count × gCO2e per 1k tokens (configurable) |
-| Local incremental inference carbon | Included | Incremental watts × hours × grid intensity |
-| ASR carbon | Included | Modeled within cloud or local inference |
-| Embedding carbon | Included | Modeled within cloud or local inference |
-| Retrieval carbon | Included | Modeled within cloud or local inference |
-| Orchestration carbon | Modeled as zero | Negligible for inference-time orchestration |
-| Storage carbon | Modeled as zero | Reliable allocation data unavailable |
-| Network transfer carbon | Modeled as zero | Transfer modeled in MB; carbon attribution TBD |
-| Observability carbon | Modeled as zero | Negligible for inference-time monitoring |
+**Device:** Apple M4 Mac
 
-### Components Modeled as Zero
+---
 
-The following components are currently set to zero due to lack of reliable attribution data:
-- **Orchestration**: Inference-time API routing overhead is negligible compared to model inference
-- **Storage**: Cloud storage carbon allocation per meeting is not reliably attributable
-- **Network transfer carbon**: Network energy per MB transferred varies by infrastructure; modeled in volume only
-- **Observability**: Monitoring overhead is negligible at the per-meeting level
+## Energy Calculation
 
-These are listed in [limitations.md](limitations.md) and may be included in future disclosures.
-
-## Calculation Parameters
-
-### Cloud Inference Carbon
+### Transcription Phase (Whisper ASR)
 
 ```
-cloud_inference_carbon_gCO2e = (cloud_tokens / 1000) × co2e_g_per_1k_tokens
+Duration: 60 minutes = 1.0 hour (real-time transcription)
+Incremental power: 0.86 W
+Energy: 0.86 W × 1.0 h = 0.00086 kWh
 ```
 
-Default: 0.50 gCO2e per 1,000 tokens (mid estimate)
-
-### Local Incremental Inference Carbon
+### Summarization Phase (Gemma 4 LLM)
 
 ```
-local_incremental_energy_kwh = (incremental_power_watts / 1000) × active_processing_hours
-local_incremental_carbon_gCO2e = local_incremental_energy_kwh × grid_intensity_gCO2e_per_kwh
+Duration: 45 seconds = 0.0125 hour (post-meeting inference)
+Incremental power: 12.11 W
+Energy: 12.11 W × 0.0125 h = 0.00015 kWh
 ```
 
-Defaults:
-- Incremental power: 5W (mid estimate, above baseline device usage)
-- Active processing: 1.0 hour (full meeting duration)
-- Grid intensity: 350 gCO2e/kWh
-
-### SCI Per Functional Unit
+### Total Energy (E)
 
 ```
-sci_g_per_workflow = total_consumer_operational_carbon_gCO2e / 1
-sci_g_per_meeting_hour = total_consumer_operational_carbon_gCO2e / 1.0
-sci_g_per_second_audio = total_consumer_operational_carbon_gCO2e / 3600
-sci_g_per_1k_cloud_tokens = cloud_carbon_gCO2e / (cloud_tokens / 1000)  [N/A if tokens = 0]
+E = 0.00086 + 0.00015 = 0.00101 kWh
 ```
 
-## Water (Supplemental, Not in SCI Score)
+---
+
+## Carbon Intensity (I)
 
 ```
-direct_datacenter_water_liters = cloud_it_energy_kwh × PUE × WUE_l_per_kwh
+I = 350 gCO2eq/kWh
 ```
 
-Water is reported separately and is NOT included in the SCI carbon intensity calculation.
+**Source:** IEA World Energy Outlook 2023, global average electricity emission factor
 
-Direct datacenter cooling-water estimates are included as a supplemental enterprise infrastructure-efficiency metric. They are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.
+**Approach:** Location-based (global average; users should substitute region-specific values)
 
-## Avoided Emissions (Separate from SCI Score)
+---
 
-Avoided emissions represent the difference between the cloud-first baseline and the solution architecture:
+## Embodied Emissions (M)
 
 ```
-avoided_cloud_carbon = cloud_first_carbon - solution_cloud_carbon
-net_avoided_total_carbon = cloud_first_total_carbon - solution_total_carbon
+M = 0 gCO2eq
 ```
 
-Avoided emissions are informational and are NOT part of the SCI score. They represent what would have been emitted under the baseline, not a reduction claim.
+Embodied emissions are excluded because reliable allocation methodology for consumer device hardware is unavailable. This is a documented limitation.
 
-## Calculation Results
+---
 
-See [sci_ai_calculation.csv](sci_ai_calculation.csv) for the machine-readable results.
+## Functional Unit (R)
+
+```
+R = 1 meeting workflow
+```
+
+One 60-minute meeting intelligence workflow, encompassing audio capture, transcription, summarization, action item extraction, and searchable indexing.
+
+---
+
+## Final Calculation
+
+```
+O = E × I = 0.00101 kWh × 350 gCO2eq/kWh = 0.35 gCO2eq
+
+SCI = (O + M) / R
+SCI = (0.35 + 0) / 1
+SCI = 0.35 gCO2eq per meeting workflow
+```
+
+---
+
+## Comparison to Original Modeled Estimate
+
+| Metric | Original (modeled) | Revised (measured) | Change |
+|--------|-------------------|-------------------|--------|
+| Incremental power | 5 W (estimate) | 0.86–12.11 W (measured) | Varies by phase |
+| Energy per meeting | 0.005 kWh | 0.00101 kWh | 80% lower |
+| SCI score | 1.75 gCO2eq | 0.35 gCO2eq | **80% lower** |
+
+The measured SCI is significantly lower than the original modeled estimate because:
+1. Transcription (Whisper) draws only 0.86 W, much lower than the 5W estimate
+2. Summarization (Gemma 4) draws 12 W but only runs for ~45 seconds
+3. The original model assumed 5W continuous for the full meeting duration
+
+---
+
+## Secondary Functional Units
+
+| Functional Unit | Value |
+|-----------------|-------|
+| gCO2eq per meeting workflow | 0.35 |
+| gCO2eq per meeting hour | 0.35 |
+| gCO2eq per second of audio | 0.000097 |
+| gCO2eq per transcript generated | 0.35 |

@@ -1,51 +1,56 @@
-# SCI for AI Boundary Definition
+# SCI Boundary Definition — Offlyn Clipper
 
 ## Disclosure Boundary
 
-Consumer SCI operational boundary for inference-time meeting intelligence.
+Consumer SCI operational boundary for on-device meeting intelligence.
+
+## Software System
+
+**Offlyn Clipper** — A native macOS application that provides AI-powered meeting intelligence running entirely on Apple Silicon devices.
 
 ## Component Inclusion Table
 
-| Component | Cloud-first | Local-first | Hybrid | Included? | Notes |
-|-----------|-------------|-------------|--------|-----------|-------|
-| Cloud LLM inference | Yes | No | Partial | Included | Token-based operational proxy using gCO2e/1k tokens |
-| Local LLM inference | No | Yes | Yes | Included | Incremental energy above baseline device usage |
-| ASR / transcription | Cloud | Local | Local | Included | Modeled assumptions for Whisper-class models |
-| Embeddings | Cloud | Local | Local or partial | Included | Modeled assumptions for embedding generation |
-| Retrieval | Cloud | Local | Hybrid | Included | Modeled assumptions for RAG operations |
-| Network transfer | High | Zero | Low | Included | Modeled MB per meeting for cloud uploads |
-| Storage | Cloud | Local | Hybrid | Optional | Included only if assumptions exist; currently modeled as zero |
-| Observability | Cloud | Local | Hybrid | Optional | Included only if assumptions exist; currently modeled as zero |
-| End-user baseline device power | Yes | Yes | Yes | Excluded | Excluded because all architectures require a user device; not a differentiator |
-| Incremental local inference power | No | Yes | Yes | Included | Only the additional power above baseline device usage |
-| Embodied hardware carbon | Unknown | Unknown | Unknown | Excluded by default | Reliable allocation data unavailable for local devices, cloud hardware, networking, and storage |
-| Water | Cloud cooling | None direct | Partial | Supplemental only | Not part of SCI carbon score; reported as separate metric |
+| Component | Included? | Method | Notes |
+|-----------|-----------|--------|-------|
+| On-device ASR (Whisper) | Yes | Measured | Real-time transcription, 0.86W incremental |
+| On-device LLM (Gemma 4) | Yes | Measured | Summarization, action items, 12.11W incremental |
+| On-device embeddings (BGE-Base) | Yes | Included in LLM | Semantic indexing |
+| Audio capture | Yes | Negligible | System audio capture overhead |
+| Local storage I/O | Yes | Negligible | SQLite writes, file storage |
+| Network transfer | No | N/A | No network activity in default config |
+| Cloud API calls | No | N/A | No cloud in default config |
+| Model training | No | Out of scope | Pre-operational; Provider SCI |
+| Model download | No | Amortized | One-time ~4GB; negligible per-meeting |
+| Baseline device power | No | Excluded | Common to all architectures |
+| Embodied hardware | No | Unavailable | No reliable allocation method |
+
+## Shared Infrastructure
+
+No included component runs on shared multi-tenant infrastructure. Offlyn Clipper runs entirely on end-user Apple Silicon devices. Audio capture, transcription, embedding generation, and AI inference all execute locally on the user's Mac.
+
+There is no cloud component in the default configuration. If a future hybrid fallback mode is enabled, cloud API calls would be consumed via standard API endpoints with per-request carbon attribution using published token-based proxy factors, and would be measured and reported separately.
 
 ## Boundary Rationale
 
 ### Why Consumer SCI
 
 This disclosure uses the Consumer SCI boundary because:
-- The audit compares architecture choices available to enterprise customers
-- Provider SCI (training, deployment) is common across scenarios and not within customer control
-- Consumer SCI is actionable for architecture decision-making
+- Offlyn Clipper is end-user software running on consumer devices
+- The SCI measures operational carbon during actual use
+- Provider SCI (model training, deployment) is excluded as it occurred before operational use
 
 ### Why Baseline Device Power is Excluded
 
-All three scenarios (cloud-first, local-first, hybrid) require the user to have a computing device running. The baseline device power consumption is identical across architectures and does not contribute to the comparison. Only the incremental inference power above this baseline is included.
+All Clipper users have an active Mac running. The baseline device power consumption (198 mW measured) is identical regardless of whether Clipper is processing a meeting or idle. Only the incremental inference power above this baseline is included because it represents the additional energy consumed specifically for the meeting intelligence workload.
 
 ### Why Embodied Carbon is Excluded
 
 Embodied carbon allocation requires lifecycle assessment data for:
-- End-user devices (laptops, phones)
-- Cloud provider server hardware
-- Networking infrastructure
-- Storage systems
+- End-user MacBooks (various models and generations)
+- Apple Silicon chips
 
-Reliable, publicly available allocation methodologies for these components do not exist at the precision level required for this disclosure. Embodied carbon may be included in future versions when allocation data improves.
+Reliable, publicly available allocation methodologies for consumer devices do not exist at the precision level required for meaningful disclosure. M = 0 is used with this limitation explicitly documented.
 
-### Why Water is Supplemental
+### Why Network is Excluded
 
-Water is an important infrastructure efficiency metric but is not part of the SCI carbon intensity formula (gCO2e/R). It is reported separately to inform decision-making without conflating distinct environmental impacts.
-
-Direct datacenter cooling-water estimates are included as a supplemental enterprise infrastructure-efficiency metric. They are not included in the SCI score, not part of the SCI carbon-intensity calculation, and not part of the SCI conformity claim.
+Offlyn Clipper in its default configuration performs all processing locally with zero network activity. There are no API calls, no cloud uploads, and no data leaving the device. Network carbon is therefore zero.

@@ -1,0 +1,19 @@
+Clipper Power Measurement Summary
+=================================
+Timestamp: Wed Jul 22 22:48:25 PDT 2026
+Device: Apple M4
+
+POWER READINGS:
+- Baseline (idle):         198 mW
+- Transcription (avg):     1056 mW
+- Summarization (avg):     12313 mW
+- Transcription peak:      903 mW
+- Summarization peak:      9979 mW
+
+INCREMENTAL POWER:
+- Transcription: 858 mW (.85 W)
+- Summarization: 12115 mW (12.11 W)
+
+FOR SCI CALCULATION:
+Use the higher incremental value for conservative estimate.
+Grid intensity: 350 gCO2eq/kWh (IEA 2023)

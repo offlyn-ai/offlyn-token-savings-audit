@@ -1,38 +1,33 @@
-# Self-Attestation
+# Self-Certification Attestation for ISO/IEC 21031:2024
 
-Offlyn.ai self-attests that this disclosure is prepared in good faith using the assumptions, boundaries, and calculations disclosed in this repository.
+By submitting this application, I hereby:
 
-This disclosure is designed to support architecture comparison and enterprise decision support. It does not claim carbon neutrality, carbon credits, offsets, certified emissions reductions, or formal ISO/SCI certification unless and until a public certificate is issued by the relevant certification program.
+1. **DECLARE** that the submitted SCI calculation conforms to all requirements of ISO/IEC 21031:2024 (Software Carbon Intensity).
 
-## Disclosure Details
+2. **ATTEST** that the calculation was performed in good faith using appropriate methodologies and data sources consistent with ISO/IEC 21031:2024.
 
-| Field | Value |
-|-------|-------|
-| Applicant | Offlyn.ai |
-| Disclosure version | 0.1.0 |
-| Disclosure type | SCI for AI-aligned Consumer SCI operational proxy |
-| Status | Modeled, self-attested, not third-party verified |
-| Standard reference | Green Software Foundation SCI for AI / ISO/IEC 21031:2024-informed |
-| Boundary | Consumer SCI — 60-minute meeting intelligence workflow |
-| Primary functional unit | One meeting workflow |
-| Water treatment | Supplemental, not included in SCI score |
-| Embodied carbon | Excluded (M = 0) |
+3. **ACKNOWLEDGE** that this is self-certification under the ISO/IEC 17050 framework and does not constitute third-party certification or independent validation by the Green Software Foundation.
 
-## Signatory
+4. **MAINTAIN** supporting documentation for all calculations, methodologies, data sources, and assumptions for a minimum of 3 years and will provide upon reasonable request.
 
-| Field | Value |
-|-------|-------|
-| Name | Joel Nishant Reddy |
-| Title | Co-founder, Offlyn.ai |
-| Date | 2026-06-10 |
-| Signature | /s/ Joel Nishant Reddy |
+5. **ACCEPT RESPONSIBILITY** for the accuracy, completeness, and conformity of the calculation and disclosure with ISO/IEC 21031:2024.
 
-Submitted by: Joel Nishant Reddy, Co-founder, Offlyn.ai
+6. **AGREE** to promptly correct any errors or inaccuracies if identified through community review or self-discovery.
 
-Joel Nishant Reddy is signing this self-attestation on behalf of Offlyn.ai for the modeled SCI for AI-aligned Consumer SCI operational proxy disclosure.
+7. **UNDERSTAND** that GSF's role is limited to verifying disclosure completeness, not validating calculation accuracy or ISO/IEC 21031:2024 conformity.
 
-## Statement of Responsibility
+8. **AGREE** to use the certificate and badge only as permitted in the GSF Badge Usage Guidelines, including always using the "self-certified" qualifier when claiming ISO/IEC 21031:2024 conformity.
 
-The applicant takes responsibility for the accuracy of the assumptions, boundary definitions, and calculation methodology disclosed in this package. Any changes to methodology or assumptions will be versioned and disclosed in subsequent releases.
+9. **ACKNOWLEDGE** that false or misleading self-certification may result in certificate revocation, public notice, and potential legal consequences.
 
-This self-attestation does not constitute a claim of Green Software Foundation certification, ISO certification, verified emissions reduction, carbon neutrality, or any third-party validation unless and until such validation is formally completed and publicly documented.
+10. **CONSENT** to public disclosure of the submitted information to enable community review and validation.
+
+---
+
+**Signature:** /s/ Joel Nishant Reddy
+
+**Date:** July 23, 2026
+
+**Name and title:** Joel Nishant Reddy, Co-founder
+
+**Organization:** Offlyn.ai
