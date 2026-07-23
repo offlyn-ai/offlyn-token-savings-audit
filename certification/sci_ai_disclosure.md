@@ -9,7 +9,7 @@
 | Software version | 1.0 (beta-2026-07) |
 | Software URL | https://clipper.offlyn.ai/ |
 | SCI score | **0.35 gCO2eq per meeting workflow** |
-| Measurement period | July 22, 2026 |
+| Measurement period | 2026-07-22 to 2026-07-22 (benchmark) |
 | Boundary | Consumer SCI operational boundary |
 | Functional unit | One 60-minute meeting intelligence workflow |
 | Formula | SCI = (E × I + M) / R |
@@ -43,9 +43,11 @@ Offlyn Clipper is a native macOS application that provides AI-powered meeting in
 
 **SCI score:** 0.35 gCO2eq per meeting workflow
 
-**Measurement period:** July 22, 2026 (benchmark measurement)
+**Measurement period:** 2026-07-22 to 2026-07-22 (single-day benchmark)
 
 **Measurement method:** Direct power measurement using macOS `powermetrics` on Apple M4
+
+**Note:** This is a representative benchmark measurement. The SCI score represents the carbon intensity of a single 60-minute meeting workflow based on measured power consumption during controlled testing.
 
 ---
 
@@ -87,7 +89,9 @@ There is no cloud component in the default configuration.
 
 **How counted:** Each meeting processed through Clipper from start (begin recording) to finish (summary generated) counts as one functional unit.
 
-**Total in measurement period:** 1 meeting workflow (benchmark measurement)
+**Total in measurement period:** 1 meeting workflow
+
+**Benchmark methodology:** Power consumption was measured during a controlled 60-minute meeting workflow using macOS `powermetrics`. The measurement captures one complete functional unit to establish the per-workflow SCI score. This benchmark approach is appropriate for consumer software where each user runs the software independently on their own device.
 
 ---
 
@@ -96,6 +100,8 @@ There is no cloud component in the default configuration.
 ### Energy
 
 **Total energy:** 0.00101 kWh per meeting workflow
+
+**PUE applied:** N/A — local consumer device (no datacenter infrastructure)
 
 **Method:** Direct power measurement using macOS `powermetrics` with incremental power calculation (active inference power minus baseline idle power)
 
@@ -150,17 +156,16 @@ There is no cloud component in the default configuration.
 **Show your calculation:**
 
 ```
-Transcription energy = 0.86 W × 1.0 h = 0.00086 kWh
-Summarization energy = 12.11 W × 0.0125 h = 0.00015 kWh
-Total E = 0.00086 + 0.00015 = 0.00101 kWh
+Energy breakdown:
+  Transcription = 0.86 W × 1.0 h = 0.00086 kWh
+  Summarization = 12.11 W × 0.0125 h = 0.00015 kWh
+  Total E = 0.00101 kWh
 
-I = 350 gCO2eq/kWh (IEA World Energy Outlook 2023)
-M = 0 gCO2eq (embodied excluded)
+E × I = 0.00101 kWh × 350 gCO2eq/kWh = 0.35 gCO2eq
+M = 0 gCO2eq
 R = 1 meeting workflow
 
-O = E × I = 0.00101 × 350 = 0.35 gCO2eq
-
-SCI = (O + M) / R = (0.35 + 0) / 1 = 0.35 gCO2eq per meeting workflow
+SCI = (E × I + M) / R = (0.35 + 0) / 1 = 0.35 gCO2eq per meeting workflow
 ```
 
 ### Assumptions and Limitations

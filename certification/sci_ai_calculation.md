@@ -95,11 +95,11 @@ One 60-minute meeting intelligence workflow, encompassing audio capture, transcr
 ## Final Calculation
 
 ```
-O = E × I = 0.00101 kWh × 350 gCO2eq/kWh = 0.35 gCO2eq
+E × I = 0.00101 kWh × 350 gCO2eq/kWh = 0.35 gCO2eq
+M = 0 gCO2eq
+R = 1 meeting workflow
 
-SCI = (O + M) / R
-SCI = (0.35 + 0) / 1
-SCI = 0.35 gCO2eq per meeting workflow
+SCI = (E × I + M) / R = (0.35 + 0) / 1 = 0.35 gCO2eq per meeting workflow
 ```
 
 ---
